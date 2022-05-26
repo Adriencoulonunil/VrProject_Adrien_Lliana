@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma première page en THREE.js</title>
+</head>
+
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        referrerpolicy="no-referrer"></script>
+    <script>
+        // on crée l'envrionnement 
+        // on veut créer une scène 
+        let maScene = new THREE.Scene();
+
+        // variable de la fenêtre
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+
+        // on va créer un point de vue. il y en a plusieur dans pointj. Nous on veut celle de perspective de l'oeil humain 
+        // ce qu'on met dans la parenthèse correspond à des trucs que tu peux mettre sur interet ( en gros c'est tes réglages caméra)
+        let maCamera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+
+        // on crée ce qui permet de faire le rendu 
+        let moteurRendu = new THREE.WebGLRenderer({ antialias: true });
+
+        // il faut adapter le moteur de rendu à la taille de l'écran 
+        moteurRendu.setSize(w, h);
+
+        // On veut lier l'ensemble à la page 
+        document.body.appendChild(moteurRendu.domElement);
+        console.clear();
+        // hauteur et largeur de la fenêtre
+        let wiw = window.innerWidth;
+        let wih = window.innerHeight;
+
+        // créer une scène
+        let scene = new THREE.Scene();
+        // créer une caméra
+        let camera = new THREE.PerspectiveCamera(75, wiw / wih);
+        let moteur_de_rendu = new THREE.WebGLRenderer({ antialias: true });
+        moteur_de_rendu.setSize(wiw, wih);
+        document.body.appendChild(moteur_de_rendu.domElement);
+
+        let creer_cube = () => {
+            let geometrie = new THREE.TorusGeometry(0.5, 0.4, 15, 100);
+            let material = new THREE.MeshNormalMaterial();
+            let cube = new THREE.Mesh(geometrie, material);
+            cube.vitesse = THREE.Math.randFloat(0.05, 0.1);
+            return cube;
+        }
+
+        for (let i = 0; i < 150; i++) {
+            let cube = creer_cube();
+            scene.add(cube);
+            cube.position.z = THREE.Math.randInt(-70, -10);;
+            cube.position.x = THREE.Math.randInt(-20, 20);
+            cube.position.y = THREE.Math.randInt(-10, 10);
+        }
+
+        let animer = () => {
+            scene.children.forEach(el => {
+                el.rotation.x += el.vitesse;
+                el.position.z += el.vitesse;
+            });
+            moteur_de_rendu.render(scene, camera);
+            requestAnimationFrame(animer);
+        }
+
+        animer();
+
+    </script>
+</body>
+
+</html>

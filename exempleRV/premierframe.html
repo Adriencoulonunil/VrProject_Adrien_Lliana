@@ -12,10 +12,14 @@
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <a-assets>
         <a-asset-item id='navette' src="navette.gltf"></a-asset-item>
+        <a-asset-item id='apollo' src="apollo.gltf"></a-asset-item>
         <a-asset-item id='drone' src="robot.gltf"></a-asset-item>
+        <a-asset-item id='satelite' src="satelite.gltf"></a-asset-item>
         <a-asset-item id='pierre' src="pierre.gltf"></a-asset-item>
+        <a-asset-item id='triceratops' src="Triceratops.gltf"></a-asset-item>
         <img id='abc' src="roche.jpeg" alt="maTexture">
         <img id='fond' src="red12.jpeg" alt="monFond">
+        <audio id='audio1' src="Post Apocalyptic Ambience  Nuclear Wasteland White Noise ASMR Relaxation.mp3"></audio>
     </a-assets>
     <a-scene background="color: #FAFAFA">
         <a-sky src="#fond"></a-sky>
@@ -35,17 +39,68 @@
             animation="property : position; from : -20 10 -500; to : -20 5 0; loop: true; dur : 2000; dir : alternate"
             animation__autre="property : color; to: red"></a-entity>
         <a-entity gltf-model='#pierre' scale='40 50 60' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 20 20 -500; to : 20 20 500; loop: true; dur : 2000; dir : alternate"
+            animation="property : position; from : 20 20 -1000; to : 20 20 1000; loop: true; dur : 2000; dir : alternate"
             animation__autre="property : color; to: red"> </a-entity>
         <a-entity gltf-model='#pierre' scale='100 90 80' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 30 30 -500; to : 30 30 500; loop: true; dur : 2000; dir : alternate"
+            animation="property : position; from : 30 30 -700; to : 30 30 700; loop: true; dur : 2000; dir : alternate"
             animation__autre="property : color; to: red"> </a-entity>
+        <!-- comment mettre delay, action que dans un sens mais plusieurs fois-->
         <a-entity gltf-model='#pierre' scale='70 100 90' position='2 2 2' rotation='0 0 0' shadow
             animation="property : position; from : 40 40 -500; to : 40 40 500; loop: true; dur : 2000; dir : alternate"
             animation__autre="property : color; to: red"> </a-entity>
 
+        <a-entity gltf-model='#apollo' position='10 1 1' rotation='0 -80 0' scale='0.01 0.01 0.01' shadow></a-entity>
+        <a-entity gltf-model='#triceratops' position='2 0.6 8' rotation='0 -100 0' scale='1 1 1' shadow>
+        </a-entity>
 
-        <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow ></a-entity>-->
+        <a-entity gltf-model='#satelite' position='120 150 2' rotation='0 50 0' shadow
+            animation="property : position; from : 120 150 2; to : 120 150 20; loop: true; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"></a-entity>
+
+
+        <script>
+            console.clear();
+            // hauteur et largeur de la fenêtre
+            let wiw = window.innerWidth;
+            let wih = window.innerHeight;
+
+            // créer une scène
+            let scene = new THREE.Scene();
+            // créer une caméra
+            let camera = new THREE.PerspectiveCamera(75, wiw / wih);
+            let moteur_de_rendu = new THREE.WebGLRenderer({ antialias: true });
+            moteur_de_rendu.setSize(wiw, wih);
+            document.body.appendChild(moteur_de_rendu.domElement);
+
+            let creer_cube = () => {
+                let geometrie = new THREE.TorusGeometry(0.5, 0.4, 15, 100);
+                let material = new THREE.MeshNormalMaterial();
+                let cube = new THREE.Mesh(geometrie, material);
+                cube.vitesse = THREE.Math.randFloat(0.05, 0.1);
+                return cube;
+            }
+
+            for (let i = 0; i < 150; i++) {
+                let cube = creer_cube();
+                scene.add(cube);
+                cube.position.z = THREE.Math.randInt(0, 10);;
+                cube.position.x = THREE.Math.randInt(20, 20);
+                cube.position.y = THREE.Math.randInt(10, 10);
+            }
+
+            let animer = () => {
+                scene.children.forEach(el => {
+                    el.rotation.x += el.vitesse;
+                    el.position.z += el.vitesse;
+                });
+                moteur_de_rendu.render(scene, camera);
+                requestAnimationFrame(animer);
+            }
+
+            animer();
+
+        </script>
+        <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow ></a-entity>	easeInOutQuad-->
     </a-scene>
 
 

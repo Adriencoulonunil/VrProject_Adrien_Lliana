@@ -5,75 +5,108 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ma première page en THREE.js</title>
+    <title>Mon premier document aFrame</title>
 </head>
 
 <body>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <a-assets>
+        <a-asset-item id='navette' src="navette.gltf"></a-asset-item>
+        <a-asset-item id='apollo' src="apollo.gltf"></a-asset-item>
+        <a-asset-item id='drone' src="robot.gltf"></a-asset-item>
+        <a-asset-item id='satelite' src="satelite.gltf"></a-asset-item>
+        <a-asset-item id='pierre' src="pierre.gltf"></a-asset-item>
+        <a-asset-item id='triceratops' src="Triceratops.gltf"></a-asset-item>
+        <img id='abc' src="roche.jpeg" alt="maTexture">
+        <img id='fond' src="red12.jpeg" alt="monFond">
+        <audio id='mars' src="mars.mp3"></audio>
+    </a-assets>
+    <a-scene background="color: #FAFAFA">
+        <a-sky src="#fond"></a-sky>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
-        referrerpolicy="no-referrer"></script>
-    <script>
-        // on crée l'envrionnement 
-        // on veut créer une scène 
-        let maScene = new THREE.Scene();
+        <a-plane src="#abc" position="0 0 -4" rotation="-90 0 0" scale="14 12 12" width="4" height="4" color="red"
+            shadow></a-plane>
+        <a-entity gltf-model='#navette' position='-20 6 -2' rotation='15 0 0' shadow
+            animation="property : position; from : -20 10 -500; to : -20 5 0; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"></a-entity>
+        <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow></a-entity>-->
+        <a-entity gltf-model='#drone' position='-20 6 -2' rotation='15 0 0' shadow
+            animation="property : position; from : -20 10 -500; to : -20 5 0; loop: true; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"></a-entity>
+        <a-entity gltf-model='#pierre' scale='40 50 60' position='2 2 2' rotation='0 0 0' shadow
+            animation="property : position; from : 20 20 -1000; to : 20 20 1000; loop: true; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='100 90 80' position='2 2 2' rotation='0 0 0' shadow
+            animation="property : position; from : 30 30 -700; to : 30 30 700; loop: true; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"> </a-entity>
+        <!-- comment mettre delay, action que dans un sens mais plusieurs fois-->
+        <a-entity gltf-model='#pierre' scale='70 100 90' position='2 2 2' rotation='0 0 0' shadow
+            animation="property : position; from : 40 40 -500; to : 40 40 500; loop: true; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"> </a-entity>
 
-        // variable de la fenêtre
-        let w = window.innerWidth;
-        let h = window.innerHeight;
+        <a-entity gltf-model='#apollo' position='10 1 1' rotation='0 -80 0' scale='0.01 0.01 0.01' shadow></a-entity>
+        <a-entity gltf-model='#triceratops' position='2 0.6 8' rotation='0 -100 0' scale='1 1 1' shadow>
+        </a-entity>
 
-        // on va créer un point de vue. il y en a plusieur dans pointj. Nous on veut celle de perspective de l'oeil humain 
-        // ce qu'on met dans la parenthèse correspond à des trucs que tu peux mettre sur interet ( en gros c'est tes réglages caméra)
-        let maCamera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+        <a-entity gltf-model='#satelite' position='120 150 2' rotation='0 50 0' shadow
+            animation="property : position; from : 120 150 2; to : 120 150 20; loop: true; dur : 2000; dir : alternate"
+            animation__autre="property : color; to: red"></a-entity>
 
-        // on crée ce qui permet de faire le rendu 
-        let moteurRendu = new THREE.WebGLRenderer({ antialias: true });
+        <a-box depth="2" height="4" width="0.5" position="-1 0.5 -3" rotation="0 25 0" color="gray" shadow sound="
+            src : #Sounds-of-Mars_wind-on-mars;
+            on : click;
+            volume : 1;
+            refDistance : 4;
+            rolloffFactor : 4;
+        "></a-box>
 
-        // il faut adapter le moteur de rendu à la taille de l'écran 
-        moteurRendu.setSize(w, h);
+        <script>
+            console.clear();
+            // hauteur et largeur de la fenêtre
+            let wiw = window.innerWidth;
+            let wih = window.innerHeight;
 
-        // On veut lier l'ensemble à la page 
-        document.body.appendChild(moteurRendu.domElement);
-        console.clear();
-        // hauteur et largeur de la fenêtre
-        let wiw = window.innerWidth;
-        let wih = window.innerHeight;
+            // créer une scène
+            let scene = new THREE.Scene();
+            // créer une caméra
+            let camera = new THREE.PerspectiveCamera(75, wiw / wih);
+            let moteur_de_rendu = new THREE.WebGLRenderer({ antialias: true });
+            moteur_de_rendu.setSize(wiw, wih);
+            document.body.appendChild(moteur_de_rendu.domElement);
 
-        // créer une scène
-        let scene = new THREE.Scene();
-        // créer une caméra
-        let camera = new THREE.PerspectiveCamera(75, wiw / wih);
-        let moteur_de_rendu = new THREE.WebGLRenderer({ antialias: true });
-        moteur_de_rendu.setSize(wiw, wih);
-        document.body.appendChild(moteur_de_rendu.domElement);
+            let creer_cube = () => {
+                let geometrie = new THREE.TorusGeometry(0.5, 0.4, 15, 100);
+                let material = new THREE.MeshNormalMaterial();
+                let cube = new THREE.Mesh(geometrie, material);
+                cube.vitesse = THREE.Math.randFloat(0.05, 0.1);
+                return cube;
+            }
 
-        let creer_cube = () => {
-            let geometrie = new THREE.TorusGeometry(0.5, 0.4, 15, 100);
-            let material = new THREE.MeshNormalMaterial();
-            let cube = new THREE.Mesh(geometrie, material);
-            cube.vitesse = THREE.Math.randFloat(0.05, 0.1);
-            return cube;
-        }
+            for (let i = 0; i < 150; i++) {
+                let cube = creer_cube();
+                scene.add(cube);
+                cube.position.z = THREE.Math.randInt(0, 10);;
+                cube.position.x = THREE.Math.randInt(20, 20);
+                cube.position.y = THREE.Math.randInt(10, 10);
+            }
 
-        for (let i = 0; i < 150; i++) {
-            let cube = creer_cube();
-            scene.add(cube);
-            cube.position.z = THREE.Math.randInt(-70, -10);;
-            cube.position.x = THREE.Math.randInt(-20, 20);
-            cube.position.y = THREE.Math.randInt(-10, 10);
-        }
+            let animer = () => {
+                scene.children.forEach(el => {
+                    el.rotation.x += el.vitesse;
+                    el.position.z += el.vitesse;
+                });
+                moteur_de_rendu.render(scene, camera);
+                requestAnimationFrame(animer);
+            }
 
-        let animer = () => {
-            scene.children.forEach(el => {
-                el.rotation.x += el.vitesse;
-                el.position.z += el.vitesse;
-            });
-            moteur_de_rendu.render(scene, camera);
-            requestAnimationFrame(animer);
-        }
+            animer();
 
-        animer();
+        </script>
+        <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow ></a-entity>	easeInOutQuad-->
+    </a-scene>
 
-    </script>
+
+
 </body>
 
 </html>

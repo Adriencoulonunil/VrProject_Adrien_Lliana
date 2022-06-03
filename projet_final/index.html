@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon premier document aFrame</title>
+    <title>Mars apocalyspe</title>
 </head>
 
 <body>
@@ -51,16 +51,10 @@
         <a-entity gltf-model='#satelite' position='120 150 2' rotation='0 50 0' shadow
             animation="property : position; from : 120 150 2; to : 120 150 20; loop: true; dur : 2000; dir : alternate"
             animation__autre="property : color; to: red"></a-entity>
+        <a-sound src="#mars"></a-sound>
 
-        <a-box depth="2" height="4" width="0.5" position="-1 0.5 -3" rotation="0 25 0" color="gray" shadow sound="
-            src : #Sounds-of-Mars_wind-on-mars;
-            on : click;
-            volume : 1;
-            refDistance : 4;
-            rolloffFactor : 4;
-        "></a-box>
 
-        <script>
+        <!-- <script>
             console.clear();
             // hauteur et largeur de la fenêtre
             let wiw = window.innerWidth;
@@ -101,7 +95,7 @@
 
             animer();
 
-        </script>
+        </script>-->
         <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow ></a-entity>	easeInOutQuad-->
     </a-scene>
 

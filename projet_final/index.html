@@ -13,13 +13,12 @@
     <a-assets>
         <a-asset-item id='navette' src="navette.gltf"></a-asset-item>
         <a-asset-item id='apollo' src="apollo.gltf"></a-asset-item>
-        <a-asset-item id='drone' src="robot.gltf"></a-asset-item>
         <a-asset-item id='satelite' src="satelite.gltf"></a-asset-item>
         <a-asset-item id='pierre' src="pierre.gltf"></a-asset-item>
         <a-asset-item id='triceratops' src="Triceratops.gltf"></a-asset-item>
         <img id='abc' src="roche.jpeg" alt="maTexture">
         <img id='fond' src="red12.jpeg" alt="monFond">
-        <audio id='mars' src="mars.mp3"></audio>
+        <audio id='mars' src="mars.mp3" preload="auto"></audio>
     </a-assets>
     <a-scene background="color: #FAFAFA">
         <a-sky src="#fond"></a-sky>
@@ -27,21 +26,16 @@
         <a-plane src="#abc" position="0 0 -4" rotation="-90 0 0" scale="14 12 12" width="4" height="4" color="red"
             shadow></a-plane>
         <a-entity gltf-model='#navette' position='-20 6 -2' rotation='15 0 0' shadow
-            animation="property : position; from : -20 10 -500; to : -20 5 0; dur : 2000; dir : alternate"
-            animation__autre="property : color; to: red"></a-entity>
-        <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow></a-entity>-->
-        <a-entity gltf-model='#drone' position='-20 6 -2' rotation='15 0 0' shadow
-            animation="property : position; from : -20 10 -500; to : -20 5 0; loop: true; dur : 2000; dir : alternate"
+            animation="property : position; from : -20 10 -500; to : -20 5 0; dur : 10000; dir : normal"
             animation__autre="property : color; to: red"></a-entity>
         <a-entity gltf-model='#pierre' scale='40 50 60' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 20 20 -1000; to : 20 20 1000; loop: true; dur : 2000; dir : alternate"
+            animation="property : position; from : 20 20 -1000; to : 20 20 1000; loop: true; dur : 4000; dir : normal"
             animation__autre="property : color; to: red"> </a-entity>
         <a-entity gltf-model='#pierre' scale='100 90 80' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 30 30 -700; to : 30 30 700; loop: true; dur : 2000; dir : alternate"
+            animation="property : position; from : 30 30 -700; to : 30 30 700; loop: true; dur : 4000; dir : normal"
             animation__autre="property : color; to: red"> </a-entity>
-        <!-- comment mettre delay, action que dans un sens mais plusieurs fois-->
         <a-entity gltf-model='#pierre' scale='70 100 90' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 40 40 -500; to : 40 40 500; loop: true; dur : 2000; dir : alternate"
+            animation="property : position; from : 40 40 -500; to : 40 40 500; loop: true; dur : 4000; dir : normal"
             animation__autre="property : color; to: red"> </a-entity>
 
         <a-entity gltf-model='#apollo' position='10 1 1' rotation='0 -80 0' scale='0.01 0.01 0.01' shadow></a-entity>
@@ -51,10 +45,10 @@
         <a-entity gltf-model='#satelite' position='120 150 2' rotation='0 50 0' shadow
             animation="property : position; from : 120 150 2; to : 120 150 20; loop: true; dur : 2000; dir : alternate"
             animation__autre="property : color; to: red"></a-entity>
-        <a-sound src="#mars"></a-sound>
+        <a-sound src="src: url(mars.mp3)" autoplay="true" position="0 2 5" loop="true"></a-sound>
 
 
-        <!-- <script>
+        <script>
             console.clear();
             // hauteur et largeur de la fenêtre
             let wiw = window.innerWidth;
@@ -95,7 +89,7 @@
 
             animer();
 
-        </script>-->
+        </script>
         <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow ></a-entity>	easeInOutQuad-->
     </a-scene>
 

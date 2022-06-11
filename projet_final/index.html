@@ -10,87 +10,93 @@
 
 <body>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
     <a-assets>
+        <!-- Id et sources des objets téléchargés-->
         <a-asset-item id='navette' src="navette.gltf"></a-asset-item>
         <a-asset-item id='apollo' src="apollo.gltf"></a-asset-item>
         <a-asset-item id='satelite' src="satelite.gltf"></a-asset-item>
         <a-asset-item id='pierre' src="pierre.gltf"></a-asset-item>
-        <a-asset-item id='triceratops' src="Triceratops.gltf"></a-asset-item>
+        <a-asset-item id='triceratops' src="Triceratops.gltf"></a-asset-item>Sphere
+        <a-asset-item id='wraith' src="wraith.gltf"></a-asset-item>
+        <!-- Décor: sol et fond  -->
         <img id='abc' src="roche.jpeg" alt="maTexture">
         <img id='fond' src="red12.jpeg" alt="monFond">
+        <!-- Id et source audio-->
         <audio id='mars' src="mars.mp3" preload="auto"></audio>
+
+
     </a-assets>
+    <!-- mise en place de la scène avec les actions liées aux objets-->
     <a-scene background="color: #FAFAFA">
+
+        <!-- Ciel/fond-->
         <a-sky src="#fond"></a-sky>
 
+        <!--Sol-->
         <a-plane src="#abc" position="0 0 -4" rotation="-90 0 0" scale="14 12 12" width="4" height="4" color="red"
             shadow></a-plane>
-        <a-entity gltf-model='#navette' position='-20 6 -2' rotation='15 0 0' shadow
-            animation="property : position; from : -20 10 -500; to : -20 5 0; dur : 10000; dir : normal"
-            animation__autre="property : color; to: red"></a-entity>
-        <a-entity gltf-model='#pierre' scale='40 50 60' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 20 20 -1000; to : 20 20 1000; loop: true; dur : 4000; dir : normal"
-            animation__autre="property : color; to: red"> </a-entity>
-        <a-entity gltf-model='#pierre' scale='100 90 80' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 30 30 -700; to : 30 30 700; loop: true; dur : 4000; dir : normal"
-            animation__autre="property : color; to: red"> </a-entity>
-        <a-entity gltf-model='#pierre' scale='70 100 90' position='2 2 2' rotation='0 0 0' shadow
-            animation="property : position; from : 40 40 -500; to : 40 40 500; loop: true; dur : 4000; dir : normal"
-            animation__autre="property : color; to: red"> </a-entity>
 
+        <!--Navette spaciale-->
+        <a-entity gltf-model='#navette' position='-20 6 -2' rotation='15 0 0' shadow
+            animation="property : position; from : -20 10 -500; to : -20 5 0; dur : 15000; dir : normal"
+            animation__autre="property : color; to: red"></a-entity>
+
+        <!-- Element apollo -->
         <a-entity gltf-model='#apollo' position='10 1 1' rotation='0 -80 0' scale='0.01 0.01 0.01' shadow></a-entity>
-        <a-entity gltf-model='#triceratops' position='2 0.6 8' rotation='0 -100 0' scale='1 1 1' shadow>
+
+        <!-- Squelette dinosaure-->
+        <a-entity gltf-model='#triceratops' position='2 0.6 8' rotation='0 -100 0' scale='1 1 1' shadow></a-entity>
+
+        <!-- Humanoîde "Wraith"-->
+        <a-entity rotation="180 180 180" animation="property: rotation; loop: true; dur: 8000">
+            <a-entity gltf-model='#wraith' position='0 0 -10' rotation='0 0 0' scale='0.05 0.05 0.05' shadow></a-entity>
         </a-entity>
 
-        <a-entity gltf-model='#satelite' position='120 150 2' rotation='0 50 0' shadow
-            animation="property : position; from : 120 150 2; to : 120 150 20; loop: true; dur : 2000; dir : alternate"
-            animation__autre="property : color; to: red"></a-entity>
+        <!-- Satelite-->
+        <a-entity rotation="0 0 0" animation="property: rotation; to: 0 60 0; loop: true; dur: 10000">
+            <a-entity gltf-model='#satelite' position='120 150 2' shadow
+                animation="property : position; from : -1000 150 2; to : 1000 150 2; loop: true; dur : 20000; dir : normal"
+                animation__autre="property : color; to: red"></a-entity>
+        </a-entity>
+
+        <!-- Son -->
         <a-sound src="src: url(mars.mp3)" autoplay="true" position="0 2 5" loop="true"></a-sound>
 
+        <!-- Lumières spot vert alien -->
+        <a-entity light="type: spot; color: #008000; angle: 110; intensity: 2" position='2 0.6 8'> </a-entity>
 
-        <script>
-            console.clear();
-            // hauteur et largeur de la fenêtre
-            let wiw = window.innerWidth;
-            let wih = window.innerHeight;
+        <!-- Lumières spot éclairage météorites -->
+        <a-entity light="type: spot; color: #FEFEE2; angle: 10; intensity: 0.75" position='30 30 30'> </a-entity>
 
-            // créer une scène
-            let scene = new THREE.Scene();
-            // créer une caméra
-            let camera = new THREE.PerspectiveCamera(75, wiw / wih);
-            let moteur_de_rendu = new THREE.WebGLRenderer({ antialias: true });
-            moteur_de_rendu.setSize(wiw, wih);
-            document.body.appendChild(moteur_de_rendu.domElement);
+        <!-- Lumière ambiance-->
+        <a-light light.color="red" light.type=directional light.intensity="100.0" position="20 100 1"></a-light>
 
-            let creer_cube = () => {
-                let geometrie = new THREE.TorusGeometry(0.5, 0.4, 15, 100);
-                let material = new THREE.MeshNormalMaterial();
-                let cube = new THREE.Mesh(geometrie, material);
-                cube.vitesse = THREE.Math.randFloat(0.05, 0.1);
-                return cube;
-            }
-
-            for (let i = 0; i < 150; i++) {
-                let cube = creer_cube();
-                scene.add(cube);
-                cube.position.z = THREE.Math.randInt(0, 10);;
-                cube.position.x = THREE.Math.randInt(20, 20);
-                cube.position.y = THREE.Math.randInt(10, 10);
-            }
-
-            let animer = () => {
-                scene.children.forEach(el => {
-                    el.rotation.x += el.vitesse;
-                    el.position.z += el.vitesse;
-                });
-                moteur_de_rendu.render(scene, camera);
-                requestAnimationFrame(animer);
-            }
-
-            animer();
-
-        </script>
-        <!-- <a-entity obj-model='#drone' position='2 2 2' rotation='0 0 0' shadow ></a-entity>	easeInOutQuad-->
+        <!-- Pluie de météorite-->
+        <a-entity gltf-model='#pierre' scale='40 50 60' shadow
+            animation="property : position; from : 20 20 -1000; to : 30 20 1000; loop: true; dur : 7525; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='100 90 80' shadow
+            animation="property : position; from : 30 30 -1000; to : 50 30 1000; loop: true; dur : 7550; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='70 100 90' shadow
+            animation="property : position; from : 40 40 -1000; to : 60 40 1000; loop: true; dur : 7500; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='60 60 100' shadow
+            animation="property : position; from : 50 50 -1000; to : 30 50 1000; loop: true; dur : 7525; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='80 40 80' shadow
+            animation="property : position; from : 60 35 -1000; to : 20 35 1000; loop: true; dur : 7500; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='50 20 90' shadow
+            animation="property : position; from : 70 25 -1000; to : 40 25 1000; loop: true; dur : 7550; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='70 40 90' shadow
+            animation="property : position; from : 80 45 -1000; to : 50 45 1000; loop: true; dur : 7500; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
+        <a-entity gltf-model='#pierre' scale='80 20 50' shadow
+            animation="property : position; from : 90 55 -1000; to : 30 55 1000; loop: true; dur : 7500; dir : normal"
+            animation__autre="property : color; to: red"> </a-entity>
     </a-scene>
 
 

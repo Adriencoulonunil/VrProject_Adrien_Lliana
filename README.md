@@ -1,20 +1,20 @@
-#Mars Apocalypse
+# Mars Apocalypse
 
-##(i) Une brève description :
+## (i) Une brève description :
 
 Pour réaliser ce projet, nous nous sommes réunis quatre fois durant plusieurs heures afin de définir d’abord notre idée initiale et de construire ensuite le code ensemble. Nous avons décidé de créer une ambiance apocalyptique et spatiale sur la planète Mars. Notre choix a été conforté par la découverte de modèles gltf d’éléments spatiaux mis en ligne gratuitement sur le site du Smithsonian.  Nous avons aussi puisé dans des sites qui donnaient accès à d’autres modèles qui complétaient bien la vision que nous avions pour notre projet. 
 
 
 “Depuis ta station spatiale orbitant autour de Mars, tes instruments de mesure perçoivent une fréquence inhabituelle émanant de la planète, et qui met en péril ton observation de l’environnement. Alors que ton modèle Apollo se dirige vers Mars afin d’élucider ce mystère, ton pilote automatique s’affole et tu t’écrases sur la planète. Lorsque tu sors du module, ton assistante humanoïde semble perturbée par une forte radiation et ne répond plus à tes commandes. L’environnement de la planète est hostile, avec de nombreuses pluies de météorites, et une curieuse lumière émane d’ossements à apparence animale… Heureusement, une navette de secours vient te chercher, mais auras-tu le temps d’étudier le squelette inquiétant avant que les radiations ne grillent les systèmes de la navette?”
 
-##(ii) au moins une capture illustrant votre projet:
+## (ii) au moins une capture illustrant votre projet:
 ![Dashboard view](/screen1.jpg)
 ![Dashboard view](/screen2.png)
 
-##(iii) la procédure d’installation requise:
+## (iii) la procédure d’installation requise:
 Il n'y a pas de procédure d'installation requise.
 
-##(iv) les éventuels modules, librairies ou scripts intégrés ou nécessaires au bon fonctionnement de votre projet:
+## (iv) les éventuels modules, librairies ou scripts intégrés ou nécessaires au bon fonctionnement de votre projet:
 Nous avons du installer trois extensions sur Visual Studio Code afin de voir notre code fonctionner.
 
 A-Frame Completion, version: v0.4.1, par Marlon Lückert
@@ -64,8 +64,8 @@ audio-preview, version: v2.0.3, par sukumo28
   -Pluie de météorite
 la pluie de météorite est un ensemble de 8 pierres qui volent en groupe toujours dans le même sens mais pas toute à la même vitesse. L'utilisation de "dir: normal" fut très utile. Elles viennent de l'infinie pour aller à l'opposer de la scène. 
   
-##(vi) le contexte de développement:
+## (vi) le contexte de développement:
 Ce projet a été développé dans le cadre du cours <Réalité virtuelle et augmentée> dispensé par Isaac Pante (SLI, Lettres, UNIL).
 
-##(vii) le contexte de développement:Authors:
+## (vii) le contexte de développement:Authors:
 Lliana Doudot et Adrien Coulon
